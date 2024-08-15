@@ -36,7 +36,7 @@
                             <Button Text="Edit"
                                     
                                 />
-                            
+
                             <!--Delete Button-->
                             <Button Text="Delete"
                                     VerticalOptions="Center"
@@ -49,13 +49,22 @@
             </CollectionView>
 
             <!-- Add Task Button -->
-            <Button Text="Add New Task" 
-                    Grid.Row="1"
-                    VerticalOptions="End" 
-                    HorizontalOptions="FillAndExpand"
-                    BackgroundColor="DodgerBlue"
-                    TextColor="White"
-                    Command="{Binding AddTaskCommand}" />
+            <HorizontalStackLayout Grid.Row="1" 
+                                   VerticalOptions="End" 
+                                   HorizontalOptions="CenterAndExpand">
+                <Button Text="Add New Task" 
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        Margin="0 5"
+                        Command="{Binding AddTaskCommand}" />
+
+                <Button Text="Map"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        Clicked="OnMapClicked"/>
+            </HorizontalStackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

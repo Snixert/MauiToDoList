@@ -67,6 +67,11 @@ namespace MauiToDoList.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void GoToMap()
+        {
+            Shell.Current.GoToAsync(nameof(Map));
+        }
     }
 
 }

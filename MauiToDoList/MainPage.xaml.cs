@@ -6,6 +6,7 @@ namespace MauiToDoList
     public partial class MainPage : ContentPage
     {
         private TaskViewModel _viewModel;
+
         public MainPage()
         {
             InitializeComponent();
@@ -36,7 +37,12 @@ namespace MauiToDoList
         {
             var button = sender as Button;
             var taskItem = button.BindingContext as TaskItem;
-            _viewModel.DeleteTaskAsync(taskItem.Id);
+            await _viewModel.DeleteTaskAsync(taskItem.Id);
+        }
+
+        public void OnMapClicked(object sender, EventArgs e)
+        {
+            _viewModel.GoToMap();
         }
     }
 
