@@ -3,24 +3,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-//using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls;
 using MauiToDoList.Models;
-
-using System;
-using System.Threading.Tasks;
-#if WINDOWS
-using Windows.Media.Capture;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Media.MediaProperties;
-#elif ANDROID
-using Android.App;
-using Android.Content;
-using Android.Provider;
-using AndroidX.Core.Content;
-using AndroidX.Core.App;
-using Android.OS;
-#endif
+using Plugin.LocalNotification;
 
 namespace MauiToDoList.ViewModels
 {
@@ -31,6 +16,7 @@ namespace MauiToDoList.ViewModels
         private DateTime _dueDate = DateTime.Now;
         private TimeSpan _dueTime;
         private int _reminderMinutes;
+        private string _imagePath = string.Empty;
 
         public string Title
         {
@@ -96,7 +82,6 @@ namespace MauiToDoList.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Title))
             {
-                // Display validation error
                 await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Validation Error", "Title is required.", "OK");
                 return;
             }
@@ -107,14 +92,31 @@ namespace MauiToDoList.ViewModels
                 Description = Description,
                 DueDate = DueDate.Date.Add(DueTime),
                 IsCompleted = false,
-                ReminderMinutes = ReminderMinutes
+                ReminderMinutes = ReminderMinutes,
+                ImagePath = _imagePath
             };
 
-            // Save to the database
+            
+
+
             App.DbContext.Tasks.Add(newTask);
             await App.DbContext.SaveChangesAsync();
 
-            // Navigate back to the MainPage
+            // Schedule notification
+            var request = new NotificationRequest
+            {
+                NotificationId = newTask.Id,
+                Title = newTask.Title,
+                Subtitle = "Reminder",
+                Description = newTask.Description,
+                BadgeNumber = 42,
+                Schedule = new NotificationRequestSchedule
+                {
+                    NotifyTime = newTask.DueDate.AddSeconds(-newTask.ReminderMinutes),
+                }
+            };
+            LocalNotificationCenter.Current.Show(request);
+
             await Shell.Current.GoToAsync("//MainPage");
         }
 

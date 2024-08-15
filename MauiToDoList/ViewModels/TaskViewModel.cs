@@ -10,6 +10,7 @@ namespace MauiToDoList.ViewModels
     public class TaskViewModel : INotifyPropertyChanged
     {
         public ICommand AddTaskCommand { get; }
+        public ICommand DeleteTaskCommand { get; }
 
         private ObservableCollection<TaskItem> _tasks;
         public ObservableCollection<TaskItem> Tasks
@@ -26,6 +27,7 @@ namespace MauiToDoList.ViewModels
         {
             LoadTasksAsync().Wait();
             AddTaskCommand = new Command(OnAddTask);
+
 
             // Subscribe to messages if needed
             MessagingCenter.Subscribe<CreateTaskViewModel>(this, "TaskAdded", (sender) =>
@@ -44,6 +46,18 @@ namespace MauiToDoList.ViewModels
         {
             // Navigate to the CreateTaskPage
             await Shell.Current.GoToAsync(nameof(CreateTaskPage));
+        }
+
+        public async Task DeleteTaskAsync(int Id)
+        {
+            var task = await App.DbContext.Tasks.FirstOrDefaultAsync(x => x.Id == Id);
+            if (task is not null)
+            {
+                App.DbContext.Tasks.Remove(task);
+                await App.DbContext.SaveChangesAsync();
+
+                this.Tasks.Remove(this.Tasks.FirstOrDefault(x => x.Id == Id));
+            }
         }
 
         // Implementing INotifyPropertyChanged

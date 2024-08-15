@@ -19,7 +19,8 @@
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal" 
                                      Padding="10"
-                                     VerticalOptions="CenterAndExpand">
+                                     VerticalOptions="CenterAndExpand"
+                                     >
                             <!-- Checkbox for IsCompleted -->
                             <CheckBox IsChecked="{Binding IsCompleted}" 
                                       VerticalOptions="Center"
@@ -31,7 +32,17 @@
                                    FontSize="18" 
                                    VerticalOptions="Center"
                                    HorizontalOptions="StartAndExpand"
-                                   TextColor="{Binding IsCompleted}" />
+                                   />
+                            <Button Text="Edit"
+                                    
+                                />
+                            
+                            <!--Delete Button-->
+                            <Button Text="Delete"
+                                    VerticalOptions="Center"
+                                    BackgroundColor="Red"
+                                    Clicked="DeleteTask"
+                                />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

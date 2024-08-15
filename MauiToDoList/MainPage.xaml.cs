@@ -31,6 +31,13 @@ namespace MauiToDoList
                 App.DbContext.SaveChanges();
             }
         }
+
+        public async void DeleteTask(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var taskItem = button.BindingContext as TaskItem;
+            _viewModel.DeleteTaskAsync(taskItem.Id);
+        }
     }
 
 }
