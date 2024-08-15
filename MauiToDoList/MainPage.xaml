@@ -1,0 +1,51 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiToDoList.MainPage">
+
+    <ContentPage.Content>
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <!-- Row for the tasks list, takes the remaining space -->
+                <RowDefinition Height="*" />
+                <!-- Row for the button -->
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Task List -->
+            <CollectionView ItemsSource="{Binding Tasks}" 
+                            SelectionMode="None"
+                            Grid.Row="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" 
+                                     Padding="10"
+                                     VerticalOptions="CenterAndExpand">
+                            <!-- Checkbox for IsCompleted -->
+                            <CheckBox IsChecked="{Binding IsCompleted}" 
+                                      VerticalOptions="Center"
+                                      Color="Green"
+                                      CheckedChanged="OnCheckBoxCheckedChanged"/>
+
+                            <!-- Task Name -->
+                            <Label Text="{Binding Title}" 
+                                   FontSize="18" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="StartAndExpand"
+                                   TextColor="{Binding IsCompleted}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Add Task Button -->
+            <Button Text="Add New Task" 
+                    Grid.Row="1"
+                    VerticalOptions="End" 
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="DodgerBlue"
+                    TextColor="White"
+                    Command="{Binding AddTaskCommand}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

@@ -1,0 +1,56 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiToDoList.CreateTaskPage">
+
+    <Grid Padding="10">
+        <!-- Define rows in the grid -->
+        <Grid.RowDefinitions>
+            <!-- Row for the scrollable content -->
+            <RowDefinition Height="*" />
+            <!-- Row for the Save button -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Scrollable content -->
+        <ScrollView Grid.Row="0">
+            <StackLayout Spacing="10">
+                <!-- Title Entry -->
+                <Entry Text="{Binding Title}" 
+                       Placeholder="Enter task title"
+                       Keyboard="Text" />
+
+                <!-- Description Entry -->
+                <Entry Text="{Binding Description}" 
+                       Placeholder="Enter task description"
+                       Keyboard="Text" />
+
+                <!-- Due Date Picker -->
+                <DatePicker Date="{Binding DueDate}" />
+
+                <!-- Due Time Picker -->
+                <TimePicker Time="{Binding DueTime}" />
+
+                <!-- Reminder Minutes Picker -->
+                <Picker SelectedIndex="{Binding ReminderMinutes}">
+                    <Picker.Items>
+                        <x:String>5</x:String>
+                        <x:String>10</x:String>
+                        <x:String>15</x:String>
+                        <x:String>30</x:String>
+                        <x:String>60</x:String>
+                    </Picker.Items>
+                </Picker>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Save Task Button -->
+        <Button Text="Save Task" 
+                Grid.Row="1"
+                VerticalOptions="End" 
+                HorizontalOptions="FillAndExpand"
+                BackgroundColor="DodgerBlue"
+                TextColor="White"
+                Command="{Binding SaveTaskCommand}"
+                IsEnabled="{Binding IsSaveEnabled}" />
+    </Grid>
+</ContentPage>
