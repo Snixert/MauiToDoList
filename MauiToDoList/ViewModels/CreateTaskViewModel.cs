@@ -112,7 +112,7 @@ namespace MauiToDoList.ViewModels
                 BadgeNumber = 42,
                 Schedule = new NotificationRequestSchedule
                 {
-                    NotifyTime = newTask.DueDate.AddSeconds(-newTask.ReminderMinutes),
+                    NotifyTime = newTask.DueDate,
                 }
             };
             LocalNotificationCenter.Current.Show(request);
