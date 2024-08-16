@@ -16,10 +16,14 @@ namespace MauiToDoList
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
-                .UseMauiMaps();
+#if ANDROID
+                .UseMauiMaps()
+#endif
+                ;
 
 #if DEBUG
             builder.Logging.AddDebug();
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
 #endif
 
             return builder.Build();

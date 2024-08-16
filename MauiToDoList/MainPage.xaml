@@ -33,9 +33,6 @@
                                    VerticalOptions="Center"
                                    HorizontalOptions="StartAndExpand"
                                    />
-                            <Button Text="Edit"
-                                    
-                                />
 
                             <!--Delete Button-->
                             <Button Text="Delete"
@@ -56,7 +53,6 @@
                         HorizontalOptions="FillAndExpand"
                         BackgroundColor="DodgerBlue"
                         TextColor="White"
-                        Margin="0 5"
                         Command="{Binding AddTaskCommand}" />
 
                 <Button Text="Map"

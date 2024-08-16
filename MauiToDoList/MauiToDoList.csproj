@@ -87,4 +87,6 @@
 	  </PackageReference>
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMauiToDoListHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>
